@@ -553,28 +553,28 @@ Notably, the compression-security analysis demonstrates that MedDef's defensive 
 \centering
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/0.05_resnet18.png}
+\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/roct_0.05_resnet18.png}
 \caption{ResNet18 Baseline}
 \label{fig:asr_resnet18_005_a}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/0.05_no_afd_mfe_msf.png}
+\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/roct_0.05_no_afd_mfe_msf.png}
 \caption{Variant A}
 \label{fig:asr_no_afd_mfe_msf_005_a}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/0.05_no_afd_mfe.png}
+\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/roct_0.05_no_afd_mfe.png}
 \caption{Variant B}
 \label{fig:asr_no_afd_mfe_005_a}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/0.05_no_afd.png}
+\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/roct_0.05_no_afd.png}
 \caption{Variant C}
 \label{fig:asr_no_afd_005_a}
 \end{subfigure}
@@ -614,7 +614,7 @@ Notably, the compression-security analysis demonstrates that MedDef's defensive 
 \centering
 \begin{subfigure}[b]{0.45\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/0.05_meddef1.png}
+\includegraphics[width=\columnwidth]{fig/asr-prunning/roct/roct_0.05_meddef1.png}
 \caption{ROCT Dataset}
 \label{fig:asr_meddef_005_a}
 \end{subfigure}
@@ -674,28 +674,28 @@ The consistently low misclassification rates across both anatomically distinct i
 \centering
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/cm/roct/resnet18.png}
+\includegraphics[width=\columnwidth]{fig/cm/roct/roct_resnet18.png}
 \caption{ResNet18 Baseline}
 \label{fig:confusion_baseline_roct}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/cm/roct/no_afd_mfe_msf.png}
+\includegraphics[width=\columnwidth]{fig/cm/roct/roct_no_afd_mfe_msf.png}
 \caption{Variant A}
 \label{fig:confusion_intermediate1_roct}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/cm/roct/no_afd_mfe.png}
+\includegraphics[width=\columnwidth]{fig/cm/roct/roct_no_afd_mfe.png}
 \caption{Variant B}
 \label{fig:confusion_intermediate2_roct}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.24\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/cm/roct/no_afd.png}
+\includegraphics[width=\columnwidth]{fig/cm/roct/roct_no_afd.png}
 \caption{Variant C}
 \label{fig:confusion_intermediate3_roct}
 \end{subfigure}
@@ -735,7 +735,7 @@ The consistently low misclassification rates across both anatomically distinct i
 \centering
 \begin{subfigure}[b]{0.45\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/cm/roct/meddef1.png}
+\includegraphics[width=\columnwidth]{fig/cm/roct/roct_meddef1.png}
 \caption{ROCT Dataset}
 \label{fig:confusion_meddef_roct}
 \end{subfigure}
@@ -786,24 +786,24 @@ To enhance interpretability and further validate our model robustness, Grad-CAM 
     \begin{tabular}{c c c c c c c}
         & Original & ResNet18 & Variant A & Variant B & Variant C & MedDef \\
         \multirow{3}{*}{\rotatebox[origin=c]{90}{ROCT}}
-        & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/0.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/resnet18_0.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd_mfe_msf0.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd_mfe0.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd0.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/meddef10.png} \\
-        & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/1.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/resnet18_1.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd_mfe_msf1.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd_mfe1.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd1.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/meddef11.png} \\
-        & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/2.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/resnet18_2.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd_mfe_msf2.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd_mfe2.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/no_afd2.png} 
-          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/meddef12.png} \\
+        & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_0.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_resnet18_0.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd_mfe_msf0.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd_mfe0.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd0.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_meddef10.png} \\
+        & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_1.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_resnet18_1.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd_mfe_msf1.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd_mfe1.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd1.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_meddef11.png} \\
+        & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_2.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_resnet18_2.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd_mfe_msf2.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd_mfe2.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_no_afd2.png} 
+          & \includegraphics[width=0.12\textwidth]{fig/saliency_map/roct/roct_meddef12.png} \\
     \end{tabular}
     \caption{ROCT dataset saliency maps showing progressive attention improvement across model variants. Column descriptions: Original (input images), ResNet18 (baseline model), Variant A (MedDef without AFD, MFE, and MSF components), Variant B (MedDef without AFD and MFE components), Variant C (MedDef without AFD component), and MedDef (full Defense-Aware Attention Mechanism). The visualization demonstrates enhanced focus on pathologically relevant retinal structures as defensive components are progressively added.}
     \label{fig:roct_saliency}
