@@ -1,0 +1,30 @@
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# Generated PDF files
+main.pdf
+
+# Development files
+guide.md
+
+# macOS files
+.DS_Store
+fig/.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
