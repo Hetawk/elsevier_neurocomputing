@@ -20,6 +20,10 @@ This repository contains the LaTeX source for "MedDef: An Efficient Self-Attenti
 ```
 ├── main.tex                    # Main manuscript
 ├── main.pdf                   # Compiled PDF output
+├── abstract.tex               # Abstract document (separate for submission)
+├── abstract.pdf              # Compiled abstract PDF
+├── declaration_interests.tex  # Declaration of interests (separate for submission)
+├── declaration_interests.pdf # Compiled declaration PDF
 ├── Makefile                   # Build automation
 ├── README.md                  # This file
 ├── elsarticle-num.bst        # Elsevier bibliography style
@@ -56,24 +60,44 @@ make main
 # or
 make
 
-# Clean auxiliary files and rebuild
-make clean && make main
+# Build all submission documents (main + abstract + declaration)
+make all
+```
+
+### Individual Document Builds
+
+```bash
+# Build abstract document
+make abstract
+
+# Build declaration of interests
+make declaration-interests
+
+# Build complete submission package
+make submission-package
 ```
 
 ### Utility Commands
 
 ```bash
-# Clean auxiliary files
-make clean
+# Clean auxiliary files and rebuild everything
+make clean && make all
 
-# Force clean rebuild
-make clean && make main
+# Validate Neurocomputing requirements
+make validate
+
+# Check page counts
+make pages
 ```
 
 ## 📄 Document Description
 
 - **`main.pdf`**: Complete manuscript for Neurocomputing journal submission
 - **`main.tex`**: LaTeX source file with all content and formatting
+- **`abstract.pdf`**: Abstract document (required for submission)
+- **`abstract.tex`**: Abstract LaTeX source
+- **`declaration_interests.pdf`**: Declaration of interests (required for submission)
+- **`declaration_interests.tex`**: Declaration of interests LaTeX source
 
 ### Key Features
 
@@ -87,20 +111,30 @@ make clean && make main
 1. **Complete Build Workflow**:
 
    ```bash
-   make clean && make main
+   make clean && make all
    ```
 
-2. **Development Workflow**:
+2. **Individual Builds**:
+
+   ```bash
+   make main           # Build main manuscript
+   make abstract       # Build abstract document
+   make declaration-interests  # Build declaration of interests
+   ```
+
+3. **Development Workflow**:
    ```bash
    make clean          # Clean auxiliary files
-   make main           # Build and check document
+   make main           # Build and check main document
    # Edit files as needed
-   make clean && make main  # Rebuild after changes
+   make all            # Rebuild all documents
    ```
 
 ## 📊 Document Statistics
 
-- **Manuscript**: ~30 pages
+- **Main manuscript**: ~30 pages
+- **Abstract**: 1 page (required for submission)
+- **Declaration of interests**: 1 page (required for submission)
 - **Bibliography**: 50+ references in BibTeX format
 - **Figures**: 8+ main figures + performance analysis visualizations
 - **File Size**: ~8MB (due to high-quality figures)
@@ -173,11 +207,19 @@ make               # Same as 'make main'
 
 ## 📚 Submission Package
 
-For journal submission, the package includes:
+For journal submission, the complete package includes:
 
 - `main.pdf` - Complete manuscript
+- `abstract.pdf` - Abstract document (required)
+- `declaration_interests.pdf` - Declaration of interests (required)
 - Source LaTeX files and bibliography
 - All figure assets in `fig/` directory
+
+**Build all submission documents:**
+
+```bash
+make submission-package
+```
 
 ---
 

@@ -1,10 +1,8 @@
-# Makefile for Knowledge-Based Systems (KBS) Paper
-# Enhanced version with extraction and integration workflows
+# Makefile for Neurocomputing Journal Submission
+# Enhanced version with complete submission package
 
 # Configuration
 MAIN = main
-ANONYMOUS = main_anonymous
-INTEGRATED = main_integrated
 SOURCE_PAPER = to_be_reference/full_tmi.tex
 BIB = ref/references
 EXTRACTED_DIR = extracted_sections_complete
@@ -14,16 +12,44 @@ EXTRACT_SCRIPT = extract_complete.py
 INTEGRATE_SCRIPT = integrate_kbs.py
 
 # Default target - build main paper directly
-all: main
+all: main abstract declaration-interests
 
 # Build main paper directly (with complete content) - force rebuild
 main:
-	@echo "Building KBS paper (forced rebuild)..."
+	@echo "Building Neurocomputing paper (forced rebuild)..."
 	pdflatex $(MAIN)
 	-bibtex $(MAIN) 2>/dev/null || true
 	pdflatex $(MAIN)
 	pdflatex $(MAIN)
 	@echo "Paper built: $(MAIN).pdf"
+
+# Build declaration of interests document - force rebuild
+declaration-interests:
+	@echo "Building declaration of interests document (forced rebuild)..."
+	pdflatex declaration_interests
+	@echo "Declaration of interests built: declaration_interests.pdf"
+
+# Build declaration of interests with dependency checking
+declaration-interests-check: declaration_interests.pdf
+
+declaration_interests.pdf: declaration_interests.tex
+	@echo "Building declaration of interests document (dependency-based)..."
+	pdflatex declaration_interests
+	@echo "Declaration of interests built: declaration_interests.pdf"
+
+# Build abstract document - force rebuild
+abstract:
+	@echo "Building abstract document (forced rebuild)..."
+	pdflatex abstract
+	@echo "Abstract built: abstract.pdf"
+
+# Build abstract with dependency checking (only rebuild if needed)
+abstract-check: abstract.pdf
+
+abstract.pdf: abstract.tex
+	@echo "Building abstract document (dependency-based)..."
+	pdflatex abstract
+	@echo "Abstract built: abstract.pdf"
 
 # Build PDF (alias for main target)
 pdf: main
@@ -162,15 +188,11 @@ declaration_interests.pdf: declaration_interests.tex
 	@echo "Declaration of interests built: declaration_interests.pdf"
 
 # Build all submission documents (combined command)
-submission-package: main anonymous highlights supporting
-	@echo "Complete submission package built:"
+submission-package: main declaration-interests
+	@echo "Complete Neurocomputing submission package built:"
 	@echo "  ✓ main.pdf - Complete manuscript"
-	@echo "  ✓ main_anonymous.pdf - Anonymized manuscript"
-	@echo "  ✓ highlights.pdf - Research highlights"
-	@echo "  ✓ author_agreement.pdf - Author agreement"
-	@echo "  ✓ cover_letter.pdf - Cover letter"
 	@echo "  ✓ declaration_interests.pdf - Declaration of interests"
-	@echo "All documents ready for Knowledge-Based Systems submission!"
+	@echo "All documents ready for Neurocomputing journal submission!"
 
 # View supporting documents
 view-author-agreement: author_agreement.pdf
@@ -221,23 +243,13 @@ view-highlights: highlights.pdf
 
 # Check paper status
 status:
-	@echo "=== KBS Paper Status ==="
+	@echo "=== Neurocomputing Paper Status ==="
 	@echo "Main file: $(MAIN).tex"
-	@echo "Anonymous file: $(ANONYMOUS).tex"
-	@echo "Template file: $(MAIN).tex"
-	@echo "Integrated file: $(INTEGRATED).tex"
-	@echo "Source paper: $(SOURCE_PAPER)"
-	@echo "Extracted sections directory: $(EXTRACTED_DIR)/"
+	@echo "Abstract file: abstract.tex"
+	@echo "Declaration file: declaration_interests.tex"
 	@echo
 	@echo "Files:"
 	@ls -la *.pdf 2>/dev/null || echo "No PDF files found"
-	@echo
-	@if [ -d "$(EXTRACTED_DIR)" ]; then \
-		echo "Extracted sections ($(shell ls $(EXTRACTED_DIR) | wc -l) files):"; \
-		ls -la $(EXTRACTED_DIR)/; \
-	else \
-		echo "No extracted sections found. Run 'make extract' first."; \
-	fi
 
 # Count pages in PDFs
 pages:
@@ -255,9 +267,9 @@ pages:
 		fi; \
 	done
 
-# Validate paper meets KBS requirements
+# Validate paper meets Neurocomputing requirements
 validate:
-	@echo "=== KBS Journal Requirements Validation ==="
+	@echo "=== Neurocomputing Journal Requirements Validation ==="
 	@if [ -f "$(MAIN).pdf" ]; then \
 		if command -v pdfinfo > /dev/null 2>&1; then \
 			pages=$$(pdfinfo "$(MAIN).pdf" 2>/dev/null | grep Pages | awk '{print $$2}'); \
@@ -267,43 +279,21 @@ validate:
 			pages="unknown"; \
 		fi; \
 		echo "✓ Paper: $(MAIN).pdf ($$pages pages)"; \
-		if [ "$$pages" != "unknown" ] && [ "$$pages" != "" ] && [ $$pages -le 20 ]; then \
-			echo "✓ Page limit: $$pages/20 pages (WITHIN LIMIT)"; \
+		if [ "$$pages" != "unknown" ] && [ "$$pages" != "" ] && [ $$pages -le 30 ]; then \
+			echo "✓ Page limit: $$pages/30 pages (WITHIN LIMIT)"; \
 		elif [ "$$pages" != "unknown" ] && [ "$$pages" != "" ]; then \
-			echo "✗ Page limit: $$pages/20 pages (EXCEEDS LIMIT)"; \
-		else \
-			echo "? Page limit: Unable to determine page count"; \
-		fi; \
-	elif [ -f "$(INTEGRATED).pdf" ]; then \
-		if command -v pdfinfo > /dev/null 2>&1; then \
-			pages=$$(pdfinfo "$(INTEGRATED).pdf" 2>/dev/null | grep Pages | awk '{print $$2}'); \
-		elif command -v mdls > /dev/null 2>&1; then \
-			pages=$$(mdls -name kMDItemNumberOfPages "$(INTEGRATED).pdf" 2>/dev/null | awk '{print $$3}'); \
-		else \
-			pages="unknown"; \
-		fi; \
-		echo "✓ Paper: $(INTEGRATED).pdf ($$pages pages)"; \
-		if [ "$$pages" != "unknown" ] && [ "$$pages" != "" ] && [ $$pages -le 20 ]; then \
-			echo "✓ Page limit: $$pages/20 pages (WITHIN LIMIT)"; \
-		elif [ "$$pages" != "unknown" ] && [ "$$pages" != "" ]; then \
-			echo "✗ Page limit: $$pages/20 pages (EXCEEDS LIMIT)"; \
+			echo "✗ Page limit: $$pages/30 pages (EXCEEDS LIMIT)"; \
 		else \
 			echo "? Page limit: Unable to determine page count"; \
 		fi; \
 	else \
-		echo "✗ No paper found. Run 'make main' or 'make integrated' first."; \
+		echo "✗ No paper found. Run 'make main' first."; \
 	fi
 	@echo
 	@if [ -f "$(MAIN).tex" ]; then \
-		grep -q "highlights" $(MAIN).tex 2>/dev/null && echo "✓ Highlights section found" || echo "✗ Highlights section missing"; \
-		grep -q "CRediT" $(MAIN).tex 2>/dev/null && echo "✓ CRediT section found" || echo "✗ CRediT section missing"; \
+		grep -q "abstract" $(MAIN).tex 2>/dev/null && echo "✓ Abstract section found" || echo "✗ Abstract section missing"; \
 		grep -q "Declaration of competing interests" $(MAIN).tex 2>/dev/null && echo "✓ Competing interests declaration found" || echo "✗ Competing interests declaration missing"; \
 		grep -q "Data availability" $(MAIN).tex 2>/dev/null && echo "✓ Data availability statement found" || echo "✗ Data availability statement missing"; \
-	elif [ -f "$(INTEGRATED).tex" ]; then \
-		grep -q "highlights" $(INTEGRATED).tex 2>/dev/null && echo "✓ Highlights section found" || echo "✗ Highlights section missing"; \
-		grep -q "CRediT" $(INTEGRATED).tex 2>/dev/null && echo "✓ CRediT section found" || echo "✗ CRediT section missing"; \
-		grep -q "Declaration of competing interests" $(INTEGRATED).tex 2>/dev/null && echo "✓ Competing interests declaration found" || echo "✗ Competing interests declaration missing"; \
-		grep -q "Data availability" $(INTEGRATED).tex 2>/dev/null && echo "✓ Data availability statement found" || echo "✗ Data availability statement missing"; \
 	fi
 
 # Archive for submission
@@ -371,63 +361,43 @@ clean-all: clean clean-extract
 
 # Help
 help:
-	@echo "KBS Paper Build System"
-	@echo "====================="
+	@echo "Neurocomputing Journal Submission Build System"
+	@echo "=============================================="
 	@echo
 	@echo "Main Targets:"
-	@echo "  all, main       - Build main KBS paper (forced rebuild)"
-	@echo "  anonymous       - Build anonymized paper for double-blind review"
-	@echo "  build           - Build main KBS paper (forced rebuild)"
-	@echo "  pdf             - Build main KBS paper (alias for main)"
-	@echo "  main-check      - Build main KBS paper (only if needed)"
-	@echo "  anonymous-check - Build anonymized paper (only if needed)"
-	@echo "  template        - Build basic KBS template (forced rebuild)"
-	@echo "  integrated      - Build integrated KBS paper (via extraction)"
-	@echo "  extract         - Extract content from IEEE source"
-	@echo "  highlights      - Build highlights document (forced rebuild)"
-	@echo "  highlights-check - Build highlights document (only if needed)"
+	@echo "  all, main       - Build main Neurocomputing paper (forced rebuild)"
+	@echo "  pdf             - Build main Neurocomputing paper (alias for main)"
+	@echo "  main-check      - Build main Neurocomputing paper (only if needed)"
 	@echo
-	@echo "Supporting Documents:"
-	@echo "  supporting      - Build all supporting documents"
-	@echo "  author-agreement - Build author agreement document"
-	@echo "  cover-letter    - Build cover letter document"
+	@echo "Submission Documents:"
 	@echo "  declaration-interests - Build declaration of interests document"
+	@echo "  declaration-interests-check - Build declaration of interests (only if needed)"
 	@echo "  submission-package - Build complete submission package"
 	@echo
 	@echo "Development:"
-	@echo "  dev             - Full development workflow (integrated)"
-	@echo "  rebuild         - Force re-extraction and rebuild"
 	@echo "  quick           - Quick compile main paper (no bibtex)"
 	@echo "  quick-main      - Quick compile main paper (no bibtex)"
-	@echo "  quick-anonymous - Quick compile anonymized paper (no bibtex)"
 	@echo
 	@echo "Utilities:"
 	@echo "  status          - Show paper status and files"
 	@echo "  pages           - Count pages in PDFs"
-	@echo "  validate        - Check KBS requirements"
-	@echo "  view            - Open integrated paper"
+	@echo "  validate        - Check Neurocomputing requirements"
 	@echo "  view-main       - Open main paper"
-	@echo "  view-anonymous  - Open anonymized paper"
 	@echo "  archive         - Create submission archive"
 	@echo
 	@echo "Cleaning:"
 	@echo "  clean           - Remove auxiliary files"
 	@echo "  clean-force     - Force clean + stop auto-build processes"
-	@echo "  clean-extract   - Remove extracted content"
 	@echo "  clean-all       - Remove all generated files"
 	@echo
 	@echo "Files:"
 	@echo "  Main: $(MAIN).tex"
-	@echo "  Anonymous: $(ANONYMOUS).tex"
-	@echo "  Source: $(SOURCE_PAPER)"
-	@echo "  Template: $(MAIN).tex"
-	@echo "  Integrated: $(INTEGRATED).tex"
-	@echo "  Extracted: $(EXTRACTED_DIR)/"
+	@echo "  Abstract: abstract.tex"
+	@echo "  Declaration: declaration_interests.tex"
 
 # Prevent deletion of intermediate files
 .PRECIOUS: $(EXTRACTED_DIR) $(INTEGRATED).tex
 
 # Declare phony targets
-.PHONY: all main anonymous build main-check anonymous-check template integrated extract rebuild highlights quick quick-main quick-anonymous quick-template pdf
-.PHONY: view view-main view-anonymous view-template view-highlights status pages validate archive dev
-.PHONY: clean clean-force clean-extract clean-all help
+.PHONY: all main declaration-interests declaration-interests-check pdf main-check submission-package
+.PHONY: quick quick-main status pages validate archive clean clean-force clean-all help
