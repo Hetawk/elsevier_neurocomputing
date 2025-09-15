@@ -12,6 +12,7 @@
 *.blg
 *.bcf
 *.run.xml
+*.spl
 
 # Generated PDF files
 main.pdf
